@@ -1,20 +1,20 @@
 // Header Section
-var headerEl = document.querySelector('header');
-var headerHighScoresEl = document.getElementById('high-scores-link');
-var headerTimeLeftEl = document.getElementById('time-left-span');
+const headerEl = document.querySelector('header');
+const headerHighScoresEl = document.getElementById('high-scores-link');
+const headerTimeLeftEl = document.getElementById('time-left-span');
 
 headerHighScoresEl.addEventListener('click', headerHighScoresElClicked);
 
 // Intro Step
-var introStepEl = document.getElementById('intro-section');
-var introStartQuizEl = document.getElementById('start-quiz-button');
+const introStepEl = document.getElementById('intro-section');
+const introStartQuizEl = document.getElementById('start-quiz-button');
 
 introStartQuizEl.addEventListener('click', introStartQuizClicked);
 
 // Quiz Step
-var quizStepEl = document.getElementById('quiz-section');
-var quizQuestionEl = document.getElementById('question-heading');
-var quizAnswerEls = document.querySelectorAll('.answer-button');
+const quizStepEl = document.getElementById('quiz-section');
+const quizQuestionEl = document.getElementById('question-heading');
+const quizAnswerEls = document.querySelectorAll('.answer-button');
 
 quizAnswerEls.forEach(function(button, index) {
   button.addEventListener('click', function(event) {
@@ -23,37 +23,37 @@ quizAnswerEls.forEach(function(button, index) {
 });
 
 // Summary Step
-var summaryStepEl = document.getElementById('summary-section');
-var summaryFinalScoreEl = document.getElementById('final-score-span');
-var summaryInitialsEl = document.getElementById('initials-input');
-var summarySubmitEl = document.getElementById('submit-button');
+const summaryStepEl = document.getElementById('summary-section');
+const summaryFinalScoreEl = document.getElementById('final-score-span');
+const summaryInitialsEl = document.getElementById('initials-input');
+const summarySubmitEl = document.getElementById('submit-button');
 
 summarySubmitEl.addEventListener('click', summarySubmitElClicked);
 
 // Evaluation Section
-var evaluationEl = document.getElementById('evaluation-div');
-var evaluationResultEl = document.getElementById('evaluation-paragraph');
+const evaluationEl = document.getElementById('evaluation-div');
+const evaluationResultEl = document.getElementById('evaluation-paragraph');
 
 // High Scores Step
-var highScoresStepEl = document.getElementById('high-scores-section');
-var highScoresListEl = document.getElementById('high-scores-list');
-var highScoresBackEl = document.getElementById('back-button');
-var highScoresClearEl = document.getElementById('clear-high-scores-button');
+const highScoresStepEl = document.getElementById('high-scores-section');
+const highScoresListEl = document.getElementById('high-scores-list');
+const highScoresBackEl = document.getElementById('back-button');
+const highScoresClearEl = document.getElementById('clear-high-scores-button');
 
 highScoresBackEl.addEventListener('click', highScoresBackElClicked);
 highScoresClearEl.addEventListener('click', highScoresClearElClicked);
 
 // Data
-var currentStepIndex = 0;
-var secondsLeft;
-var scoreInterval;
-var currentQuestionIndex= 0;
-var validationInterval;
-var validationSecondsLeft;
-var highScores = [];
+let currentStepIndex = 0;
+let secondsLeft;
+let scoreInterval;
+let currentQuestionIndex= 0;
+let validationInterval;
+let validationSecondsLeft;
+let highScores = [];
 
 // Questions
-var questions = [
+const questions = [
   {
     text: 'What is the name of the JavaScript object notation format?',
     answers: ['HTML', 'JSON', 'XML', 'YAML'],
@@ -314,6 +314,7 @@ function validateInitials() {
     summaryInitialsEl.value.length < 5 &&
     !/[^a-z]/i.test(summaryInitialsEl.value);
   if (!valid) {
+    // eslint-disable-next-line max-len
     window.alert('Valid initials are in the form of 2 to 4 letters in length. Please try again.');
     summaryInitialsEl.value = '';
   }
@@ -385,7 +386,8 @@ function updateHighScores() {
   } else {
     for (const [index, highScore] of highScores.entries()) {
       const newListItem = document.createElement('li');
-      newListItem.innerHTML = (index + 1) + '. ' + highScore.initials + ' - ' + highScore.score;
+      newListItem.innerHTML = (index + 1) + '. ' +
+        highScore.initials + ' - ' + highScore.score;
       highScoresListEl.appendChild(newListItem);
     }
     highScoresClearEl.classList.remove('display-none');
