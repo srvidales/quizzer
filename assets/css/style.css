@@ -1,0 +1,8 @@
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.display-none {
+    display: none;
+}
