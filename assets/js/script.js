@@ -12,7 +12,7 @@ introStartQuizEl.addEventListener('click', introStartQuizClicked);
 // Quiz Step
 var quizStepEl = document.getElementById('quiz-section');
 var quizQuestionEl = document.getElementById('question-heading');
-var quizAnswerEls = document.getElementsByClassName('answer-button');
+var quizAnswerEls = document.querySelectorAll('.answer-button');
 
 // Summary Step
 var summaryStepEl = document.getElementById('summary-section');
@@ -32,6 +32,26 @@ var highScoresClearEl = document.getElementById('clear-high-scores-button');
 var currentStepIndex = 0;
 var secondsLeft;
 var scoreInterval;
+var currentQuestionIndex= 0;
+
+// Questions
+var questions = [
+  {
+    text: 'What is the name of the JavaScript object notation format?',
+    answers: ['HTML', 'JSON', 'XML', 'YAML'],
+    correct: 1,
+  },
+  {
+    text: 'Which method can be used to add an element to an array?',
+    answers: ['append', 'push', 'increase', 'attach'],
+    correct: 1,
+  },
+  {
+    text: 'How do you denote a string in JavaScript?',
+    answers: ['{...}', '(...)', '[...]', '\"...\"'],
+    correct: 3,
+  },
+];
 
 // Entry point
 processStep();
@@ -115,14 +135,17 @@ function startScoreInterval() {
  * Updates question shown to the user.
  */
 function updateQuestion() {
-
+  quizQuestionEl.textContent = questions[currentQuestionIndex].text;
 }
 
 /**
  * Updates answers shown to the user.
  */
 function updateAnswers() {
-
+  quizAnswerEls.forEach(function(element, index) {
+    element.textContent = index + 1 + '. ' +
+      questions[currentQuestionIndex].answers[index];
+  });
 }
 
 // Summary Step
