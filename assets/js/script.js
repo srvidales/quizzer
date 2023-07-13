@@ -109,7 +109,16 @@ function updateScore() {
  * Handles initialization and visibility of Introduction step.
  */
 function showIntroStep() {
+  currentStepIndex = 0;
+  currentQuestionIndex = 0;
 
+  secondsLeft = 0;
+  headerTimeLeftEl.textContent = secondsLeft;
+
+  highScoresStepEl.classList.add('display-none');
+  headerEl.classList.remove('visibility-hidden');
+  introStepEl.classList.remove('display-none');
+  evaluationEl.classList.add('display-none');
 }
 
 /**
@@ -328,28 +337,28 @@ function showHighScoresStep() {
 }
 
 /**
- * func
+ * Handles hiding Introduction step.
  */
 function hideIntroStep() {
   introStepEl.classList.add('display-none');
 }
 
 /**
- * func
+ * Handles hiding Quiz step.
  */
 function hideQuizStep() {
   quizStepEl.classList.add('display-none');
 }
 
 /**
- * func
+ * Callback function that handles clicking the Back button.
  */
 function highScoresBackElClicked() {
   showIntroStep();
 }
 
 /**
- * func
+ * Callback function that handles clicking the Clear High Scores button.
  */
 function highScoresClearElClicked() {
   highScores = [];
