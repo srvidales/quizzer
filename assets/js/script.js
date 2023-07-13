@@ -38,6 +38,9 @@ var highScoresListEl = document.getElementById('high-scores-list');
 var highScoresBackEl = document.getElementById('back-button');
 var highScoresClearEl = document.getElementById('clear-high-scores-button');
 
+highScoresBackEl.addEventListener('click', highScoresBackElClicked);
+highScoresClearEl.addEventListener('click', highScoresClearElClicked);
+
 // Data
 var currentStepIndex = 0;
 var secondsLeft;
@@ -305,7 +308,52 @@ function validateInitials() {
  * Handles initialization and visibility of High Scores step.
  */
 function showHighScoresStep() {
+  switch (currentStepIndex) {
+    case 0: {
+      hideIntroStep();
+      break;
+    }
+    case 1: {
+      clearInterval(scoreInterval);
+      hideQuizStep();
+      break;
+    }
+  }
 
+  currentStepIndex = 3;
+
+  headerEl.classList.add('visibility-hidden');
+  summaryStepEl.classList.add('display-none');
+  highScoresStepEl.classList.remove('display-none');
+}
+
+/**
+ * func
+ */
+function hideIntroStep() {
+  introStepEl.classList.add('display-none');
+}
+
+/**
+ * func
+ */
+function hideQuizStep() {
+  quizStepEl.classList.add('display-none');
+}
+
+/**
+ * func
+ */
+function highScoresBackElClicked() {
+  showIntroStep();
+}
+
+/**
+ * func
+ */
+function highScoresClearElClicked() {
+  highScores = [];
+  showIntroStep();
 }
 
 /**
