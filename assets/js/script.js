@@ -193,7 +193,7 @@ function quizAnswerElClicked(event, index) {
 
 /**
  * Handles processing the answer.
- * @param {Number} answerIndex
+ * @param {Number} answerIndex The user's answer index.
  */
 function processAnswer(answerIndex) {
   showAnswerEvaluation();
@@ -245,8 +245,8 @@ function startValidationInterval() {
 
 /**
  * Handles checking the answer provided with the known right answer.
- * @param {Number} index
- * @return {boolean}
+ * @param {Number} index The user's answer index.
+ * @return {boolean} Whether the answer is correct or not.
  */
 function isCorrectAnswer(index) {
   return questions[currentQuestionIndex].correct === index;
@@ -254,7 +254,7 @@ function isCorrectAnswer(index) {
 
 /**
  * Handles updating the evaluation message shown to the user.
- * @param {boolean} correct
+ * @param {boolean} correct Whether the answer is correct or not.
  */
 function updateEvaluationMessage(correct) {
   if (correct) {
@@ -307,7 +307,7 @@ function summarySubmitElClicked() {
 
 /**
  * Handles validation the initials entered by user.
- * @return {boolean}
+ * @return {boolean} Whether the initials are valid or not.
  */
 function validateInitials() {
   const valid = summaryInitialsEl.value.length > 1 &&
