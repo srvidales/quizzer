@@ -3,6 +3,8 @@ var headerEl = document.querySelector('header');
 var headerHighScoresEl = document.getElementById('high-scores-link');
 var headerTimeLeftEl = document.getElementById('time-left-span');
 
+headerHighScoresEl.addEventListener('click', headerHighScoresElClicked);
+
 // Intro Step
 var introStepEl = document.getElementById('intro-section');
 var introStartQuizEl = document.getElementById('start-quiz-button');
@@ -101,6 +103,13 @@ function processStep() {
  */
 function updateScore() {
   headerTimeLeftEl.textContent = secondsLeft;
+}
+
+/**
+ * Callback function that handles clicking the View High Scores link.
+ */
+function headerHighScoresElClicked() {
+  showHighScoresStep();
 }
 
 // Intro Step
