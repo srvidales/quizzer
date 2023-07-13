@@ -51,6 +51,7 @@ let currentQuestionIndex= 0;
 let validationInterval;
 let validationSecondsLeft;
 let highScores = [];
+const localStorageHighScoresKey = 'highScores';
 
 // Questions
 const questions = [
@@ -118,6 +119,14 @@ function headerHighScoresElClicked() {
  * Handles initialization and visibility of Introduction step.
  */
 function showIntroStep() {
+  if (highScores.length === 0) {
+    const item = localStorage.getItem(localStorageHighScoresKey);
+    if (item !== null) {
+      highScores = JSON.parse(item);
+      updateHighScores();
+    }
+  }
+
   currentStepIndex = 0;
   currentQuestionIndex = 0;
 
@@ -300,6 +309,7 @@ function summarySubmitElClicked() {
     if (highScores.length > 10) {
       highScores.length = 10;
     }
+    localStorage.setItem(localStorageHighScoresKey, JSON.stringify(highScores));
     updateHighScores();
     currentStepIndex++;
   }
@@ -372,6 +382,8 @@ function highScoresBackElClicked() {
  */
 function highScoresClearElClicked() {
   highScores = [];
+  localStorage.removeItem(localStorageHighScoresKey);
+  updateHighScores();
   showIntroStep();
 }
 
