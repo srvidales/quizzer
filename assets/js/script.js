@@ -7,6 +7,8 @@ var headerTimeLeftEl = document.getElementById('time-left-span');
 var introStepEl = document.getElementById('intro-section');
 var introStartQuizEl = document.getElementById('start-quiz-button');
 
+introStartQuizEl.addEventListener('click', introStartQuizClicked);
+
 // Quiz Step
 var quizStepEl = document.getElementById('quiz-section');
 var quizQuestionEl = document.getElementById('question-heading');
@@ -28,6 +30,8 @@ var highScoresClearEl = document.getElementById('clear-high-scores-button');
 
 // Data
 var currentStepIndex = 0;
+var secondsLeft;
+var scoreInterval;
 
 // Entry point
 processStep();
@@ -54,6 +58,15 @@ function processStep() {
   }
 }
 
+// Header Section
+
+/**
+ * Handles updating the score shown to the user.
+ */
+function updateScore() {
+  headerTimeLeftEl.textContent = secondsLeft;
+}
+
 // Intro Step
 
 /**
@@ -63,13 +76,39 @@ function showIntroStep() {
 
 }
 
+/**
+ * Handles Start Quiz button click in Introduction Step.
+ */
+function introStartQuizClicked() {
+  processStep(++currentStepIndex);
+}
+
 // Quiz Step
 
 /**
  * Handles initialization and visibility of Quiz step.
  */
 function showQuizStep() {
+  secondsLeft = 100;
+  introStepEl.classList.add('display-none');
+  quizStepEl.classList.remove('display-none');
+  quizStepEl.classList.add('quiz-step');
+  startScoreInterval();
+}
 
+/**
+ * Creates timer that handles decreasing secondsLeft every second.
+ */
+function startScoreInterval() {
+  scoreInterval = setInterval(function() {
+    secondsLeft--;
+    updateScore();
+
+    if (secondsLeft === 0) {
+      clearInterval(scoreInterval);
+      showSummaryStep();
+    }
+  }, 1000);
 }
 
 /**
