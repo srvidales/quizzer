@@ -23,6 +23,10 @@ quizAnswerEls.forEach(function(button, index) {
 // Summary Step
 var summaryStepEl = document.getElementById('summary-section');
 var summaryFinalScoreEl = document.getElementById('final-score-span');
+var summaryInitialsEl = document.getElementById('initials-input');
+var summarySubmitEl = document.getElementById('submit-button');
+
+summarySubmitEl.addEventListener('click', summarySubmitElClicked);
 
 // Evaluation Section
 var evaluationEl = document.getElementById('evaluation-div');
@@ -41,6 +45,7 @@ var scoreInterval;
 var currentQuestionIndex= 0;
 var validationInterval;
 var validationSecondsLeft;
+var highScores = [];
 
 // Questions
 var questions = [
@@ -244,7 +249,54 @@ function updateEvaluationMessage(correct) {
  * Handles initialization and visibility of Summary step.
  */
 function showSummaryStep() {
+  currentStepIndex = 2;
+  summaryInitialsEl.value = '';
+  quizStepEl.classList.add('display-none');
+  quizStepEl.classList.remove('quiz-step');
+  summaryStepEl.classList.remove('display-none');
+  updateFinalScore();
+  clearInterval(scoreInterval);
+}
 
+/**
+ * Handles updating the final score shown to the user.
+ */
+function updateFinalScore() {
+  summaryFinalScoreEl.textContent = secondsLeft;
+}
+
+/**
+ * Callback function that handles submit button clicked.
+ */
+function summarySubmitElClicked() {
+  if (validateInitials()) {
+    showHighScoresStep();
+
+    highScores.push({initials: summaryInitialsEl.value, score: secondsLeft});
+    highScores.sort(function(a, b) {
+      return b.score - a.score;
+    });
+    if (highScores.length > 10) {
+      highScores.length = 10;
+    }
+    updateHighScores();
+    currentStepIndex++;
+  }
+}
+
+/**
+ * Handles validation the initials entered by user.
+ * @return {boolean}
+ */
+function validateInitials() {
+  const valid = summaryInitialsEl.value.length > 1 &&
+    summaryInitialsEl.value.length < 5 &&
+    !/[^a-z]/i.test(summaryInitialsEl.value);
+  if (!valid) {
+    window.alert('Valid initials are in the form of 2 to 4 letters in length. Please try again.');
+    summaryInitialsEl.value = '';
+  }
+  return valid;
 }
 
 // High Scores Step
@@ -255,3 +307,22 @@ function showSummaryStep() {
 function showHighScoresStep() {
 
 }
+
+/**
+ * Handles updating the high scores shown to the user.
+ */
+function updateHighScores() {
+  highScoresListEl.innerHTML = '';
+
+  if (highScores.length === 0) {
+    highScoresClearEl.classList.add('display-none');
+  } else {
+    for (const [index, highScore] of highScores.entries()) {
+      const newListItem = document.createElement('li');
+      newListItem.innerHTML = (index + 1) + '. ' + highScore.initials + ' - ' + highScore.score;
+      highScoresListEl.appendChild(newListItem);
+    }
+    highScoresClearEl.classList.remove('display-none');
+  }
+}
+
