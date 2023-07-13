@@ -70,6 +70,41 @@ const questions = [
     answers: ['{...}', '(...)', '[...]', '\"...\"'],
     correct: 3,
   },
+  {
+    text: 'Which global object provides mathematical functions in JavaScript?',
+    answers: ['Math', 'Number', 'Maths', 'Arithmetic'],
+    correct: 0,
+  },
+  {
+    text: 'What is the output of \"2\" + 2 in JavaScript?',
+    answers: ['4', '22', '2', 'error'],
+    correct: 1,
+  },
+  {
+    text: 'Which keyword is used to declare a constant in JavaScript?',
+    answers: ['static', 'final', 'const', 'immutable'],
+    correct: 2,
+  },
+  {
+    text: 'What is the output of null == undefined in JavaScript?',
+    answers: ['true', 'false', 'error', 'null'],
+    correct: 0,
+  },
+  {
+    text: 'Which method removes the last element from an array?',
+    answers: ['remove', 'delete', 'cut', 'pop'],
+    correct: 3,
+  },
+  {
+    text: 'What type of scope does a var keyword have in a function?',
+    answers: ['global', 'local', 'block', 'private'],
+    correct: 1,
+  },
+  {
+    text: 'What method converts a JSON string into a JavaScript object?',
+    answers: ['parse', 'transform', 'convert', 'decode'],
+    correct: 0,
+  },
 ];
 
 // Entry point
