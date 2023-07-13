@@ -1,13 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
     <title>JavaScript Quiz</title>
 </head>
 <body>
+
+<!-- Header Section -->
+<header>
+    <a id="high-scores-link" href="#">View High Scores</a>
+    <div>Time: <span id="time-left-span">0</span></div>
+</header>
+
+<div>
+
+    <!-- Intro Step -->
+    <section>
+        <h1>Coding Quiz Challenge</h1>
+        <p>Try to answer the following code-related questions within the time<br>
+            limit. Keep in mind that incorrect answers will penalize your score/time<br>
+            by ten seconds!</p>
+        <button id="start-quiz-button">Start Quiz</button>
+    </section>
+
+    <!-- Quiz Step -->
+    <section id="quiz-section">
+        <h1 id="question-heading">Question:</h1>
+        <div>
+            <button class="answer-button">1.</button>
+            <button class="answer-button">2.</button>
+            <button class="answer-button">3.</button>
+            <button class="answer-button">4.</button>
+        </div>
+    </section>
+
+    <!-- Summary Step -->
+    <section id="summary-section">
+        <h1>All done!</h1>
+        <div>
+            <p>Your final score is: <span id="final-score-span">0</span></p>
+        </div>
+        <div>
+            <label for="initials-input">Enter initials:</label>
+            <input id="initials-input">
+            <button id="submit-button">Submit</button>
+        </div>
+    </section>
+
+    <!-- Evaluation Section -->
+    <div id="evaluation-div">
+        <hr>
+        <p id="evaluation-paragraph"></p>
+    </div>
+
+    <!-- High Scores Step -->
+    <section id="high-scores-section">
+        <h1>High Scores</h1>
+        <ul id="high-scores-list"></ul>
+        <button id="back-button">Go Back</button>
+        <button id="clear-high-scores-button">Clear High Scores</button>
+    </section>
+
+</div>
+
 <script src="./assets/js/script.js"></script>
 </body>
 </html>
