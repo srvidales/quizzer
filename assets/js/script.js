@@ -25,3 +25,81 @@ var highScoresStepEl = document.getElementById('high-scores-section');
 var highScoresListEl = document.getElementById('high-scores-list');
 var highScoresBackEl = document.getElementById('back-button');
 var highScoresClearEl = document.getElementById('clear-high-scores-button');
+
+// Data
+var currentStepIndex = 0;
+
+// Entry point
+processStep();
+
+/**
+ * Quiz App State Machine
+ */
+function processStep() {
+  switch (currentStepIndex) {
+    case 0:
+      showIntroStep();
+      break;
+    case 1:
+      showQuizStep();
+      updateQuestion();
+      updateAnswers();
+      break;
+    case 2:
+      showSummaryStep();
+      break;
+    case 3:
+      showHighScoresStep();
+      break;
+  }
+}
+
+// Intro Step
+
+/**
+ * Handles initialization and visibility of Introduction step.
+ */
+function showIntroStep() {
+
+}
+
+// Quiz Step
+
+/**
+ * Handles initialization and visibility of Quiz step.
+ */
+function showQuizStep() {
+
+}
+
+/**
+ * Updates question shown to the user.
+ */
+function updateQuestion() {
+
+}
+
+/**
+ * Updates answers shown to the user.
+ */
+function updateAnswers() {
+
+}
+
+// Summary Step
+
+/**
+ * Handles initialization and visibility of Summary step.
+ */
+function showSummaryStep() {
+
+}
+
+// High Scores Step
+
+/**
+ * Handles initialization and visibility of High Scores step.
+ */
+function showHighScoresStep() {
+
+}
