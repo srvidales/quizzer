@@ -14,6 +14,12 @@ var quizStepEl = document.getElementById('quiz-section');
 var quizQuestionEl = document.getElementById('question-heading');
 var quizAnswerEls = document.querySelectorAll('.answer-button');
 
+quizAnswerEls.forEach(function(button, index) {
+  button.addEventListener('click', function(event) {
+    quizAnswerElClicked(event, index);
+  });
+});
+
 // Summary Step
 var summaryStepEl = document.getElementById('summary-section');
 var summaryFinalScoreEl = document.getElementById('final-score-span');
@@ -33,6 +39,8 @@ var currentStepIndex = 0;
 var secondsLeft;
 var scoreInterval;
 var currentQuestionIndex= 0;
+var validationInterval;
+var validationSecondsLeft;
 
 // Questions
 var questions = [
@@ -146,6 +154,88 @@ function updateAnswers() {
     element.textContent = index + 1 + '. ' +
       questions[currentQuestionIndex].answers[index];
   });
+}
+
+/**
+ * Callback function that handles clicking one of the answer buttons.
+ * @param {Event} event The click event.
+ * @param {number} index The element index.
+ */
+function quizAnswerElClicked(event, index) {
+  processAnswer(index);
+}
+
+/**
+ * Handles processing the answer.
+ * @param {Number} answerIndex
+ */
+function processAnswer(answerIndex) {
+  showAnswerEvaluation();
+
+  const correct = isCorrectAnswer(answerIndex);
+
+  if (correct) {
+    const correctAudio = new Audio('./assets/audio/correct.wav');
+    correctAudio.play().then(() => console.log('correct.wav played.'));
+  } else {
+    secondsLeft -= 10;
+    const incorrectAudio = new Audio('./assets/audio/incorrect.wav');
+    incorrectAudio.play().then(() => console.log('incorrect.wav played.'));
+  }
+
+  updateEvaluationMessage(correct);
+
+  if (currentQuestionIndex < questions.length - 1) {
+    currentQuestionIndex++;
+    updateQuestion();
+    updateAnswers();
+  } else {
+    showSummaryStep();
+  }
+}
+
+/**
+ * Handles showing the answer evaluation result to the user.
+ */
+function showAnswerEvaluation() {
+  validationSecondsLeft = 3;
+  startValidationInterval();
+  evaluationEl.classList.remove('display-none');
+}
+
+/**
+ * Creates timer that handles the seconds the answer evaluation is shown.
+ */
+function startValidationInterval() {
+  validationInterval = setInterval(function() {
+    validationSecondsLeft--;
+
+    if (validationSecondsLeft === 0) {
+      evaluationEl.classList.add('display-none');
+      clearInterval(validationInterval);
+    }
+  }, 2000);
+}
+
+/**
+ * Handles checking the answer provided with the known right answer.
+ * @param {Number} index
+ * @return {boolean}
+ */
+function isCorrectAnswer(index) {
+  return questions[currentQuestionIndex].correct === index;
+}
+
+/**
+ * Handles updating the evaluation message shown to the user.
+ * @param {boolean} correct
+ */
+function updateEvaluationMessage(correct) {
+  if (correct) {
+    evaluationResultEl.textContent = 'Correct!';
+  } else {
+    evaluationResultEl.textContent = 'Wrong!';
+  }
 }
 
 // Summary Step
